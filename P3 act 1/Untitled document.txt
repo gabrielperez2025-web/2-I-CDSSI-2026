@@ -1,0 +1,22 @@
+﻿def doubly_not_less(n):
+    def ge(a, b): return len(a) > len(b) or (len(a) == len(b) and a >= b)
+    def rev(s):
+        r = s[::-1].lstrip('0')
+        return r if r else '0'
+
+
+    if ge(rev(n), n):
+        return n
+
+
+    L = len(n)
+
+
+    for i in range(L - 1, -1, -1):
+        for d in range(int(n[i]) + 1, 10):
+            candidate = n[:i] + str(d) + '9' * (L - i - 1)
+            if ge(rev(candidate), n):
+                return candidate
+
+
+    return '1' + '0' * L
